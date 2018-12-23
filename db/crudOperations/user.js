@@ -51,8 +51,24 @@ const dbOperations = {
                 }
             }
         })
-    }
+    },
 
+    //find bu userId
+    findByUserId : (userId,callback)=>{
+        User.findOne({
+            'userId' : userId
+        },function(err, result){
+            if(err){
+                callback(err, null)
+            }else{
+                if(!result){
+                    callback(null, null)
+                }else{
+                    callback(null, result)
+                }
+            }
+        })
+    }
 
 }
 
