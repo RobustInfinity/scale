@@ -11,6 +11,8 @@ const dbOperations = {
         data['public_id'] = image.public_id;
         data['url'] = image.url
         data['enableSharing'] = image.enableSharing
+        data['title'] = image.title !== undefined ? image.title : ''
+        data['description'] = image.description !== undefined ? image.description : ''
         var image = new Image({...data})
         image.save(function(err, result){
             if(err){

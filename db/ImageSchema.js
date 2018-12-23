@@ -18,6 +18,12 @@ const ImageSchema = new Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
+    title : {
+        type : String
+    },
+    description : {
+        type : String
+    },
     url : {
         type : String,
         required : true
