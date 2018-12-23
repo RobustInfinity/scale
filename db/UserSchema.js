@@ -21,14 +21,10 @@ const UserSchema = new Schema({
         required  :true,
         type : String
     },
-    // images : [{
-    //     imageId : {
-    //         type : String
-    //     },
-    //     uploadDate : {
-    //         type : Date
-    //     }
-    // }]
+    images : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Image'
+    }]
 })
 
 module.exports = mongoose.model('User', UserSchema)

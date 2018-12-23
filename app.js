@@ -3,6 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
+var cloudinary = require('cloudinary')
 
 var config = require('./config/index')
 var sessionHandler = require('./config/utils/sessionHandler')
@@ -15,6 +16,12 @@ mongoose.connect(config.DB_URL, {useNewUrlParser : true}).then(()=>{
     console.log("Successfully connected to MongoDB");
 }).catch((err)=>{
     console.log("Unable to connect to MongoDB ",err);
+})
+
+cloudinary.config({
+    cloud_name : config.CLOUD_NAME,
+    api_key : config.API_KEY,
+    api_secret : config.API_SECRET
 })
 
 var app = express();
