@@ -21,7 +21,7 @@ const validate = (obj)=>{
         errors.email = 'Email cannot be empty';
         isValid = false
     }
-    if(/^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(email)){
+    if(!/^([a-zA-Z0-9_\-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(email)){
         errors.email = 'Invalid Email'
         isValid = false
     }
@@ -31,7 +31,7 @@ const validate = (obj)=>{
         errors.password ='Password cannot be empty'
         isValid = false
     }
-    if(password.length < 6){
+    if(0 < password.length && password.length < 6){
         errors.password = 'Password must have minimum 6 characters'
         isValid = false
     }
