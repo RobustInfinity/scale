@@ -13,7 +13,7 @@ var imageRouter = require('./routes/images')
 
 //connecting to DB
 console.log(config.DB_URL)
-mongoose.connect(config.DB_URL, {useNewUrlParser : true}).then(()=>{
+mongoose.connect(config.DB_URL || process.env.DB_URL, {useNewUrlParser : true}).then(()=>{
     console.log("Successfully connected to MongoDB");
 }).catch((err)=>{
     console.log("Unable to connect to MongoDB ",err);
@@ -48,7 +48,7 @@ app.use('/users', usersRouter);
 app.use('/images',imageRouter)
 
 
-app.listen(config.PORT, function(){
+app.listen(config.PORT || process.env.PORT, function(){
     console.log('Started Successfully at ' + config.PORT)
 })
 
