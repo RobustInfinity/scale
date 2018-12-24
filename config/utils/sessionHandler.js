@@ -14,6 +14,7 @@ const sessionOpearations = {
         payload['email'] = userData.email
         console.log(TIMEOUT)
         var jwtOperations = require('./jwtOperations')
+        console.log(TIMEOUT)
         var sessionId = jwtOperations.generateToken(payload, TIMEOUT)  //session expires in 24 hrs from login
         payload['sessionId'] = sessionId 
         Session.create(payload,function(error, result){
