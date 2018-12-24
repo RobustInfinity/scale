@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var imageRouter = require('./routes/images')
 
 //connecting to DB
+console.log(config.DB_URL)
 mongoose.connect(config.DB_URL, {useNewUrlParser : true}).then(()=>{
     console.log("Successfully connected to MongoDB");
 }).catch((err)=>{
