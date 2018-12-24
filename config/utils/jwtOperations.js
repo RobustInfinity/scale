@@ -5,7 +5,7 @@ const {SECRET_KEY} = require('../index')
 const jwtOperations = {
     //return new JWT 
     generateToken : (payload, expiresIn)=>{
-        console.log(expiresIn)
+        console.log(SECRET_KEY)
         return jwt.sign(payload, SECRET_KEY, {"expiresIn" : expiresIn})
     },
 
