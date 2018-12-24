@@ -1,4 +1,4 @@
-const {HRS_24} = require('../index')
+const {TIMEOUT} = require('../index')
 const Session = require('../../db/SessionSchema')
 const AUTH_URLS = require('./auth_urls')
 const SIMPLE_URLS = require('./simple_urls')
@@ -12,9 +12,9 @@ const sessionOpearations = {
         payload['userId'] = userData.userId
         payload['name'] = userData.name
         payload['email'] = userData.email
-        console.log(HRS_24)
+        console.log(TIMEOUT)
         var jwtOperations = require('./jwtOperations')
-        var sessionId = jwtOperations.generateToken(payload, HRS_24)  //session expires in 24 hrs from login
+        var sessionId = jwtOperations.generateToken(payload, TIMEOUT)  //session expires in 24 hrs from login
         payload['sessionId'] = sessionId 
         Session.create(payload,function(error, result){
             if(error){
@@ -29,7 +29,8 @@ const sessionOpearations = {
         })
     },
 
-    destroySession : (userId,callback)=>{
+
+    destroySession : function(userId,callback){
         Session.find({
             'userId' : userId
         }).remove(function(err, result){
@@ -42,6 +43,7 @@ const sessionOpearations = {
         })
     },
 
+    //check session for auth urls
     checkSession : function(request, response, next){
 
         if(AUTH_URLS.indexOf(request.url) > -1){
@@ -50,7 +52,7 @@ const sessionOpearations = {
                 var tokenArray = tokenHeader.split(" ")
                 var token = tokenArray[1]
                 
-                //find session form DB
+                //find session fromm DB
                 Session.findOne({
                     sessionId : token
                 },function(err, session){
@@ -64,6 +66,7 @@ const sessionOpearations = {
                             var jwtOperations = require('./jwtOperations')
                             jwtOperations.verifyToken(session.sessionId,function(err, result){
                                 if(err){
+                                    //if session expired, delete from db
                                     session.remove(function(err, result1){
                                         if(err){
                                             response.json({'message' : 'Some Error Occured !!!'})

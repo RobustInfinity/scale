@@ -8,7 +8,7 @@ const jwtOperations = {
         return jwt.sign(payload, SECRET_KEY, {"expiresIn" : expiresIn})
     },
 
-    //varify token
+    //verify token
     verifyToken : function(token, callback){
         // try{
             console.log(token)

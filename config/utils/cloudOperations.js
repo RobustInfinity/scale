@@ -4,6 +4,7 @@ const dbOperations = require('../../db/crudOperations/image')
 
 const cloudOperations = {
 
+    //upload image to cloud storage
     uploadImage : (filepath, callback)=>{
         cloudinary.v2.uploader.upload(filepath,function(err, result){
             if(err){

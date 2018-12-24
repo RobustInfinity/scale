@@ -1,4 +1,4 @@
 
 
 //session protected urls
-module.exports = ['/users/logout','/images/upload-image','/images/search-image']
+module.exports = ['/images/upload-image','/images/search-image']
