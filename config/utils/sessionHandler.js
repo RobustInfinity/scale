@@ -60,15 +60,26 @@ const sessionOpearations = {
                         if(!session){
                             response.send({"message" : 'Session not found. Login in again'})
                         }else{
-                            request.userData = session
+                            
                             var jwtOperations = require('./jwtOperations')
                             jwtOperations.verifyToken(session.sessionId,function(err, result){
                                 if(err){
-                                    response.json({'message' : 'Session Expired. Please Login'})
+                                    session.remove(function(err, result1){
+                                        if(err){
+                                            response.json({'message' : 'Some Error Occured !!!'})
+                                        }else{
+                                            if(!result1){
+                                                response.json({'message' : 'Session not Found. Please Login.'})
+                                            }else{
+                                                response.json({'message' : 'Session Expired. Please Login.'})
+                                            }
+                                        }
+                                    })
                                 }else{
                                     if(!result){
                                         response.json({'message' : 'Some Error Occured'})
                                     }else{
+                                        request.userData = session
                                         next();
                                     }
                                 }

@@ -14,9 +14,9 @@ router.post('/upload-image',function(request, response){
     if(isValid){
         cloudOperations.uploadImage(body.filepath, function(err, result){
             if(err){
-
+                response.send({'message' : 'Error Occured. Failed to upload'})
             }else{
-
+                if(!result){}
             }
         })
     }else{
